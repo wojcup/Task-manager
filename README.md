@@ -1,66 +1,50 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+ to_do_list
+A Laravel project: Daily Tasks Manager (To-Do List) application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A project to show Laravel skills for the second stage interview for the PHP Developer position at Safety Services
 
-## About Laravel
+This project has got potential to become a fully developed product with the ability to create a list of tasks that you need to complete each day, set deadlines for each task, and track your progress.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+In addition, as a future project, the Daily Tasks Manager could allow you to set reminders for important tasks and receive notifications when deadlines are approaching (#features which need to be scoped and planned first).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Predicted use of technologies:
+ - Laravel
+ - Laravel Breeze (b)
+ - Laravel Sail (b)
+ - Vue with Inertia
+ - Vite
+ - Axios
+ - Tailwind or Bootstrap
+ - MySQL, MariaDB, or PostgreSQL
+ - Faker (b)
+ - Docker
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Project requirements:
 
-## Learning Laravel
+a) Functionalities:
+ - A list of the existing notes, (when there are any) — and make this the landing page
+ - Create a note (at least one input field for the text, and buttons to submit and cancel)
+ - Read a note (immediately display inline on the list view, or optionally more detail on a dedicated view)
+ - Update a note (change its text/contents)
+ - Delete a note (ensure to include user confirmation via a modal)
+   - Bonus: soft-deletions
+   - Bonus: restoring items
+   - Bonus: a search input that, upon entering values, provides real-time updates to the state/drawing of the then-filtered results/list
+   - Bonus: an authentication system, utilising Laravel Breeze, with users, logins, password resets, and user-attributed resources (so the to-do list is private and personal to each user)
+   - Extra Bonus: require email verification for user sign-up
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+b) UX/UI Elements
+ - Have an 'Add a new task' input at the top. So, just a text input with that as the placeholder
+    - Bonus: if the application begins with the with the cursor auto-focused on the first input, so it's much easier to start adding tasks
+    - Bonus: after adding each task, ensure the cursor auto-focuses on the first input again, so that it's a repeatable action
+ - There aren't any hard requirements for the UI, as we're keen to see how you interpret the specification; but we do expect the UI to be responsive and work reasonably well on a mobile device
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+c) Internal criteria
+ - Use MySQL, MariaDB, or PostgreSQL for storage
+ - Ensure good form validation, data sanitisation and handling of any errors/inputted data that doesn't meet the requirements (with easy-to-understand UI feedback for the user)
+ - For key UI elements, such as buttons, inputs, and modals (for action confirmations), please write these as reusable SFCs (Single-File Components), ensure a single direction for the flow of data ('props down, events up')
+ - Complete Git history is expected and required to demonstrate your workflow (including the use of branches, issues), with clear commit subjects, detailed descriptions (where appropriate) that would be representative of working on a real project
+ - Adherence to the Laravel coding standards and best practices for structure and formatting in both PHP and Vue is expected, whilst ensuring overall consistency across your code
+    - Bonus: set up factories and seeders with Faker, so that safe and realistic dummy data can be randomly generated
+    - Bonus: make use of Laravel Sail to assist with this being a reproducible project that we can easily look at
