@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('task', function (Blueprint $table) {
             $table->bigIncrements('task_id')->unsigned();
+            $table->uuid( 'uuid' );
             $table->string('name');
             $table->longText('description');
             $table->integer('owner_id');

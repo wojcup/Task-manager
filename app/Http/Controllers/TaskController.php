@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,9 +33,10 @@ class TaskController extends Controller{
         ]);
 
         $req_values = [
-            'name' => $request->name,
-            'description' => $request->description,
-            'owner_id' => Auth::id(),
+            'uuid'          => Str::uuid(),
+            'name'          => $request->name,
+            'description'   => $request->description,
+            'owner_id'      => Auth::id(),
         ];
 
         Task::create( $req_values );
@@ -45,8 +47,9 @@ class TaskController extends Controller{
     /**
      * Display the specified resource.
      */
-    public function show(string $id){
-        //
+    public function show( string $uuid ){
+        $task = Task::where( 'uuid', $uuid )->where( 'owner_id', Auth::id() )->firstOrFail();
+        return view( 'tasks.show' )->with( 'task', $task );
     }
 
     /**
