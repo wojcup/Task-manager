@@ -12,11 +12,7 @@ class TaskController extends Controller{
      */
     public function index(){
         $tasks = Task::where( 'owner_id', Auth::id() )->latest( 'updated_at' )->get();
-        $tasks->each( function( $task ){
-            dump( $task->task_id.' - '.$task->description );
-        });
-
-        // dd( $tasks );
+        return view( 'tasks.index' )->with( 'tasks', $tasks );
     }
 
     /**
