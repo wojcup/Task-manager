@@ -47,8 +47,11 @@ class TaskController extends Controller{
     /**
      * Display the specified resource.
      */
-    public function show( string $uuid ){
-        $task = Task::where( 'uuid', $uuid )->where( 'owner_id', Auth::id() )->firstOrFail();
+    public function show( Task $task ){
+        if( $task->owner_id != Auth::id() ){
+            return abort( 403 );
+        }
+
         return view( 'tasks.show' )->with( 'task', $task );
     }
 

@@ -10,12 +10,9 @@
 
             <a href="{{ route('tasks.create') }}" class="btn-link btn-lg mb-2">+ New Task</a>
 
-
             @forelse( $tasks as $task )
                 <div class="my-10 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                    <h2 class="font-bold text-2xl"><a href="{{ route( 'tasks.show', $task->uuid ) }}">{{ $task->name }}</a>
-                        
-                    </h2>
+                    <h2 class="font-bold text-2xl"><a href="{{ route( 'tasks.show', $task ) }}">{{ $task->name }}</a></h2>
                     <p class="mt-2">{{ Str::limit( $task->description, 200 ) }}</p>
                     <span class="block mt-4 text-sm opacity-70">{{ $task->updated_at ? $task->updated_at->diffForHumans() : $task->created_at?->diffForHumans() }}</span>
                 </div>

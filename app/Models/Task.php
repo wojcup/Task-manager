@@ -10,4 +10,8 @@ class Task extends Model{
 
     protected $table = 'task';
     protected $guarded = [];
+
+    public function getRouteKeyName(){
+        return 'uuid';
+    }
 }
