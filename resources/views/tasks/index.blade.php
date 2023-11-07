@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tasks') }}
+            {{ request()->routeIs( 'tasks.index' ) ?  __( 'Tasks created' ) : __( 'Trash items' ) }}
         </h2>
     </x-slot>
 
@@ -10,7 +10,9 @@
 
             <x-alert-success>{{ session( 'success' ) }}</x-alert-success>
 
-            <a href="{{ route('tasks.create') }}" class="btn btn-link btn-lg mb-2">+ New Task</a>
+            @if( request()->routeIs( 'tasks.index' ) )
+                <a href="{{ route('tasks.create') }}" class="btn btn-link btn-lg mb-2">+ New Task</a>
+            @endif
 
             @forelse( $tasks as $task )
                 <div class="my-10 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
@@ -19,9 +21,12 @@
                     <span class="block mt-4 text-sm opacity-70">{{ $task->updated_at ? $task->updated_at->diffForHumans() : $task->created_at?->diffForHumans() }}</span>
                 </div>
             @empty
-            <p>There are no tasks for you yet</p>
+                @if( request()->routeIs( 'tasks.index' ) )
+                    <p>There are no tasks for you yet</p>
+                @else
+                    <p>Trash seems to be empty</p>
+                @endif
             @endforelse
-
 
             {{ $tasks->links() }}
         </div>

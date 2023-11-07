@@ -16,7 +16,7 @@
                 <form action="{{ route( 'tasks.destroy', $task ) }}" method="post">
                     @method('delete')
                     @csrf
-                    <button type="submit" class="btn btn-danger ml-4" onclick="return confirm( 'Confirm deleting the Task' );">Destroy Task</button>
+                    <button type="submit" class="btn btn-danger ml-4" onclick="return confirm( 'Confirm deleting the Task' );">Move to Trash</button>
                 </form>
             </div>
 

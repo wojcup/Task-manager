@@ -18,7 +18,7 @@ class TaskController extends Controller{
         $tasks = Task::whereBelongsTo( Auth::user() )->latest( 'updated_at' )->paginate( 2 );
 
 
-        return view( 'tasks.index' )->with( 'tasks', $tasks );
+        return view( 'tasks.index', ['view' => 'Tasks created'] )->with( 'tasks', $tasks );
     }
 
     /**
@@ -106,6 +106,6 @@ class TaskController extends Controller{
 
         $task->delete();
 
-        return to_route( 'tasks.index' )->with( 'success', 'Task has been removed successfully' );
+        return to_route( 'tasks.index' )->with( 'success', 'Task has been moved to Trash now' );
     }
 }
