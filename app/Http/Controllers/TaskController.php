@@ -58,15 +58,37 @@ class TaskController extends Controller{
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id){
-        //
+    public function edit( Task $task ){
+        if( $task->owner_id != Auth::id() ){
+            return abort( 403 );
+        }
+
+        return view( 'tasks.edit' )->with( 'task', $task );
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id){
-        //
+    public function update( Request $request, Task $task ){
+
+        if( $task->owner_id != Auth::id() ){
+            return abort( 403 );
+        }
+
+        $request->validate([
+            'name' => 'required|max:120',
+            'description' => 'required'
+        ]);
+
+        $req_values = [
+            'name'          => $request->name,
+            'description'   => $request->description,
+        ];
+        // $task->where( 'task_id', $task->task_id )->update( $req_values );
+        $task->update( $req_values );
+
+        return to_route( 'tasks.show', $task );
     }
 
     /**

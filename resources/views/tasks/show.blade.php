@@ -10,6 +10,7 @@
             <div class="flex">
                 <p class="opacity-70"><strong>Submitted: </strong> {{ $task->created_at->diffForHumans() }}</p>
                 <p class="opacity-70 ml-8"><strong>Updated at: </strong>{{ $task->updated_at->diffForHumans() }}</p>
+                <a href="{{ route( 'tasks.edit', $task ) }}" class="btn-link ml-auto">Edit Task</a>
             </div>
 
             <div class="my-10 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
