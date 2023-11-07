@@ -6,13 +6,18 @@ use App\Models\Task;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TaskController extends Controller{
     /**
      * Display a listing of the resource.
      */
     public function index(){
-        $tasks = Task::where( 'owner_id', Auth::id() )->latest( 'updated_at' )->paginate(2);
+        // $tasks = Task::where( 'owner_id', Auth::id() )->latest( 'updated_at' )->paginate(2);
+        // $tasks = Auth::user()->tasks()->latest( 'updated_at' )->paginate( 2 );
+        $tasks = Task::whereBelongsTo( Auth::user() )->latest( 'updated_at' )->paginate( 2 );
+
+
         return view( 'tasks.index' )->with( 'tasks', $tasks );
     }
 
@@ -36,10 +41,9 @@ class TaskController extends Controller{
             'uuid'          => Str::uuid(),
             'name'          => $request->name,
             'description'   => $request->description,
-            'owner_id'      => Auth::id(),
         ];
 
-        Task::create( $req_values );
+        Auth::user()->tasks()->create( $req_values );
 
         return to_route( 'tasks.index' );
     }
@@ -48,7 +52,8 @@ class TaskController extends Controller{
      * Display the specified resource.
      */
     public function show( Task $task ){
-        if( $task->owner_id != Auth::id() ){
+
+        if( !$task->user->is( Auth::user() ) ){
             return abort( 403 );
         }
 
@@ -59,7 +64,7 @@ class TaskController extends Controller{
      * Show the form for editing the specified resource.
      */
     public function edit( Task $task ){
-        if( $task->owner_id != Auth::id() ){
+        if( !$task->user->is( Auth::user() ) ){
             return abort( 403 );
         }
 
@@ -72,7 +77,7 @@ class TaskController extends Controller{
      */
     public function update( Request $request, Task $task ){
 
-        if( $task->owner_id != Auth::id() ){
+        if( !$task->user->is( Auth::user() ) ){
             return abort( 403 );
         }
 
@@ -95,7 +100,7 @@ class TaskController extends Controller{
      * Remove the specified resource from storage.
      */
     public function destroy( Task $task ){
-        if( $task->owner_id != Auth::id() ){
+        if( !$task->user->is( Auth::user() ) ){
             return abort( 403 );
         }
 
