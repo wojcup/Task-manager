@@ -17,7 +17,7 @@
 
                     <x-textarea name="description" field="description" rows="10" class="w-full mt-6" :value="@old( 'description', $task->description )"></x-textarea>
 
-                    <x-button class="mt-4">Save Changes</x-button>
+                    <x-button class="mt-4 btn">Save Changes</x-button>
                 </form>
             </div>
         </div>

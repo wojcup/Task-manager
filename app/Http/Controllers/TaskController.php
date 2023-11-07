@@ -85,16 +85,22 @@ class TaskController extends Controller{
             'name'          => $request->name,
             'description'   => $request->description,
         ];
-        // $task->where( 'task_id', $task->task_id )->update( $req_values );
+
         $task->update( $req_values );
 
-        return to_route( 'tasks.show', $task );
+        return to_route( 'tasks.show', $task )->with( 'success', 'Task has been updated successfully' );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id){
-        //
+    public function destroy( Task $task ){
+        if( $task->owner_id != Auth::id() ){
+            return abort( 403 );
+        }
+
+        $task->delete();
+
+        return to_route( 'tasks.index' )->with( 'success', 'Task has been removed successfully' );
     }
 }
