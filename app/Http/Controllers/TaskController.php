@@ -26,7 +26,20 @@ class TaskController extends Controller{
      * Store a newly created resource in storage.
      */
     public function store(Request $request){
-        //
+        $request->validate([
+            'name' => 'required|max:120',
+            'description' => 'required'
+        ]);
+
+        $req_values = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'owner_id' => Auth::id(),
+        ];
+
+        Task::create( $req_values );
+
+        return to_route( 'tasks.index' );
     }
 
     /**
