@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+// foreach ($routeCollection as $value) {
+//     dd( $value );
+// }
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -36,7 +43,7 @@ Route::get( '/trashed/{task}', [TrashedTaskController::class, 'show'] )
     ->middleware( 'auth' )
     ->name('trashed.show');
 
-Route::get( '/trashed/{task}', [TrashedTaskController::class, 'update'] )
+Route::put( '/trashed/{task}', [TrashedTaskController::class, 'update'] )
     ->withTrashed()
     ->middleware( 'auth' )
     ->name( 'trashed.update' );

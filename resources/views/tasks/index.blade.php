@@ -1,18 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{-- {{ request()->routeIs( 'tasks.index' ) ?  __( 'Tasks created' ) : __( 'Trash items' ) }} --}}
+            {{ request()->routeIs( 'tasks.index' ) ?  __( 'Tasks created' ) : __( 'Trash items' ) }}
         </h2>
     </x-slot>
     <div class="py-12">
 
         <?php
 
-$routeCollection = Illuminate\Support\Facades\Route::getRoutes();
 
-foreach ($routeCollection as $value) {
-    var_dump( $value );
-}
 
 ?>
 
@@ -36,7 +32,7 @@ foreach ($routeCollection as $value) {
                             @if( @request()->routeIs( 'tasks.index' ) )
                                 href="{{ route( 'tasks.show', $task ) }}"
                             @else
-                                {{-- href="{{ route( 'trashed.show', $task ) }}" --}}
+                                href="{{ route( 'trashed.show', $task ) }}"
                             @endif
                             >{{ $task->name }}
                         </a>

@@ -19,7 +19,6 @@ class TrashedTaskController extends Controller{
     
     public function show( Task $task ){
 
-        dd( $task );
         if( !$task->user->is( Auth::user() ) ){
             return abort( 403 );
         }

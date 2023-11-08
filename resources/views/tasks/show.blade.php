@@ -12,7 +12,7 @@
             <div class="flex">
                 @if( !$task->trashed() )
                     <p class="opacity-70"><strong>Submitted: </strong> {{ $task->created_at->diffForHumans() }}</p>
-                    <p class="opacity-70 ml-8"><strong>Updated at: </strong>{{ $task->updated_at->diffForHumans() }}</p>
+                    <p class="opacity-70 ml-8"><strong>Updated: </strong>{{ $task->updated_at->diffForHumans() }}</p>
                     <a href="{{ route( 'tasks.edit', $task ) }}" class="btn btn-link ml-auto">Edit Task</a>
                     <form action="{{ route( 'tasks.destroy', $task ) }}" method="post">
                         @method('delete')
@@ -20,12 +20,12 @@
                         <button type="submit" class="btn btn-danger ml-4" onclick="return confirm( 'Confirm deleting the Task' );">Move to Trash</button>
                     </form>
                 @else
-                    <p class="opacity-70"><strong>Deleted at: </strong> {{ $task->deleted_at->diffForHumans() }}</p>
+                    <p class="opacity-70"><strong>Deleted: </strong> {{ $task->deleted_at->diffForHumans() }}</p>
 
-                    <form action="{{ route( 'trashed.update', $task ) }}" method="post" class="">
-                        @method('put')
+                    <form action="{{ route( 'trashed.update', $task ) }}" method="post" class="ml-auto">
+                        @method( 'put' )
                         @csrf
-                        <button type="submit" class="btn-link">Restore Task</button>
+                        <button type="submit" class="btn btn-link">Restore Task</button>
                     </form>
 
                 @endif
