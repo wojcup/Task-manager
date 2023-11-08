@@ -37,4 +37,17 @@ class TrashedTaskController extends Controller{
             ->with( 'success', 'Task restored successfully' );
     }
 
+
+
+    public function destroy( Task $task ){
+        if( !$task->user->is( Auth::user() ) ){
+            return abort( 403 );
+        }
+
+        $task->forceDelete();
+
+        return to_route( 'trashed.index' )
+            ->with( 'success', 'Task deleted permanently' );
+    }
+
 }

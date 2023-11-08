@@ -34,19 +34,32 @@ Route::get('/dashboard', function () { return view('dashboard'); })
 Route::resource( '/tasks', TaskController::class )
     ->middleware(['auth']);
 
-Route::get( '/trashed', [TrashedTaskController::class, 'index'] )
-    ->middleware( 'auth' )
-    ->name( 'trashed.index' );
+// Route::get( '/trashed', [TrashedTaskController::class, 'index'] )
+//     ->middleware( 'auth' )
+//     ->name( 'trashed.index' );
 
-Route::get( '/trashed/{task}', [TrashedTaskController::class, 'show'] )
-    ->withTrashed()
-    ->middleware( 'auth' )
-    ->name('trashed.show');
+// Route::get( '/trashed/{task}', [TrashedTaskController::class, 'show'] )
+//     ->withTrashed()
+//     ->middleware( 'auth' )
+//     ->name('trashed.show');
 
-Route::put( '/trashed/{task}', [TrashedTaskController::class, 'update'] )
-    ->withTrashed()
-    ->middleware( 'auth' )
-    ->name( 'trashed.update' );
+// Route::put( '/trashed/{task}', [TrashedTaskController::class, 'update'] )
+//     ->withTrashed()
+//     ->middleware( 'auth' )
+//     ->name( 'trashed.update' );
+
+// Route::delete( '/trashed/{task}', [TrashedTaskController::class, 'destroy'] )
+//     ->withTrashed()
+//     ->middleware( 'auth' )
+//     ->name( 'trashed.destroy' );
+
+
+Route::prefix( '/trashed' )->name( 'trashed.' )->middleware( 'auth' )->group( function(){
+    Route::get( '/', [TrashedTaskController::class, 'index'] )->name( 'index' );
+    Route::get( '/{task}', [TrashedTaskController::class, 'show'] )->name( 'show' )->withTrashed();
+    Route::put( '/{task}', [TrashedTaskController::class, 'update'] )->name( 'update' )->withTrashed();
+    Route::delete( '/{task}', [TrashedTaskController::class, 'destroy'] )->name( 'destroy' )->withTrashed();
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])

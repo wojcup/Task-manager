@@ -17,7 +17,7 @@
                     <form action="{{ route( 'tasks.destroy', $task ) }}" method="post">
                         @method('delete')
                         @csrf
-                        <button type="submit" class="btn btn-danger ml-4" onclick="return confirm( 'Confirm deleting the Task' );">Move to Trash</button>
+                        <button type="submit" class="btn btn-danger ml-4" onclick="return confirm( 'Confirm moving the Task to Trash' );">Move to Trash</button>
                     </form>
                 @else
                     <p class="opacity-70"><strong>Deleted: </strong> {{ $task->deleted_at->diffForHumans() }}</p>
@@ -25,7 +25,13 @@
                     <form action="{{ route( 'trashed.update', $task ) }}" method="post" class="ml-auto">
                         @method( 'put' )
                         @csrf
-                        <button type="submit" class="btn btn-link">Restore Task</button>
+                        <button type="submit" class="btn-link">Restore Task</button>
+                    </form>
+
+                    <form action="{{ route( 'trashed.destroy', $task ) }}" method="post" class="">
+                        @method( 'delete' )
+                        @csrf
+                        <button type="submit" class="btn btn-danger ml-4" onclick="return confirm( 'This will delete this Task permanently. Are you sure to proceed?' );">Delete Permanently</button>
                     </form>
 
                 @endif
