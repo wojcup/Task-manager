@@ -20,21 +20,34 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () { return view('dashboard'); })
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-Route::resource( '/tasks', TaskController::class )->middleware(['auth']);
+Route::resource( '/tasks', TaskController::class )
+    ->middleware(['auth']);
 
-Route::get( '/trashed', [TrashedTaskController::class, 'index'] )->middleware( 'auth' )->name( 'trashed.index' );
+Route::get( '/trashed', [TrashedTaskController::class, 'index'] )
+    ->middleware( 'auth' )
+    ->name( 'trashed.index' );
 
+Route::get( '/trashed/{task}', [TrashedTaskController::class, 'show'] )
+    ->withTrashed()
+    ->middleware( 'auth' )
+    ->name('trashed.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::get( '/trashed/{task}', [TrashedTaskController::class, 'update'] )
+    ->withTrashed()
+    ->middleware( 'auth' )
+    ->name( 'trashed.update' );
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
